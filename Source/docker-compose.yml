@@ -1,0 +1,17 @@
+version: "3.7"
+
+services:
+  jira:
+    image: docker.dev.mfire.co/JiraWindowsDocker
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    restart: unless-stopped
+    container_name: jira
+    volumes:
+      - D:\Apps\Jira\Home:C:\JiraHome
+    # environment:
+networks:
+  default:
+    external:
+      name: nat

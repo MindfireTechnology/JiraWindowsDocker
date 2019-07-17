@@ -1,5 +1,5 @@
 
-FROM microsoft/windowsservercore
+FROM mcr.microsoft.com/windows/servercore:ltsc2016
 
 # We need to download & install the JDK
 #WORKDIR /Downloads
