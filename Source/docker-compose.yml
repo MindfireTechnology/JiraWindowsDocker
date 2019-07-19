@@ -2,15 +2,25 @@ version: "3.7"
 
 services:
   jira:
-    image: docker.dev.mfire.co/JiraWindowsDocker
+    image: docker.dev.mfire.co/jirawindows
     build:
       context: .
       dockerfile: ./Dockerfile
+      args:
+        - JDKVERSION=11+28_windows-x64
+        - JIRAVERSION=8.2.3
     restart: unless-stopped
     container_name: jira
     volumes:
       - D:\Apps\Jira\Home:C:\JiraHome
-    # environment:
+    deploy:
+      resources:
+        reservations:
+          memory: 4G
+    environment:
+      - JRE_HOME=C:/JDK
+      - CATALINA_HOME=C:/Jira
+      - JIRA_HOME=C:/JiraHome
 networks:
   default:
     external:
