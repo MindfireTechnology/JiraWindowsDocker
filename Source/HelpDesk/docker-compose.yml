@@ -1,0 +1,26 @@
+version: "3.7"
+
+services:
+  jira:
+    image: docker.dev.mfire.co/jirawindows/helpdesk
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+      args:
+        - JDKVERSION=11
+        - JDKBUILD=28_windows-x64
+        - JIRAVERSION=4.2.3-x64
+    restart: unless-stopped
+    container_name: jirahelpdesk2
+    volumes:
+      - D:\Apps\Jira\Home:C:\JiraHome
+    deploy:
+      resources:
+        reservations:
+          memory: 4G
+    environment:
+      - JAVA_HOME=C:/JDK
+networks:
+  default:
+    external:
+      name: nat
